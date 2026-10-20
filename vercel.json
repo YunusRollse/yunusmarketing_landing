@@ -1,0 +1,6 @@
+{
+  "redirects": [
+    { "source": "/vsl.html", "destination": "/", "permanent": true },
+    { "source": "/vsl", "destination": "/", "permanent": true }
+  ]
+}
