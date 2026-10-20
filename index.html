@@ -323,6 +323,9 @@
   .lead-success .ls-ic{width:58px;height:58px;border-radius:50%;background:var(--accent);color:#ffffff;display:grid;place-items:center;font-size:28px;margin:0 auto 16px}
   .lead-success h3{color:var(--ink);font-size:24px;margin-bottom:8px}
   .lead-success p{color:var(--ink-soft);font-weight:500;font-size:17px}
+  .final-card > .sub{margin-bottom:26px}
+  .lead-success .ls-alt{margin-top:22px;font-size:15px;color:var(--muted)}
+  .lead-success .ls-tg{margin-top:10px;display:inline-flex}
   @media(max-width:520px){.lf-row{grid-template-columns:1fr}}
 
   /* ---- sticky bottom CTA ---- */
@@ -513,19 +516,14 @@ src="https://www.facebook.com/tr?id=2147378449183852&ev=PageView&noscript=1"
   <div class="wrap">
     <div class="final-card reveal">
       <h2>Bepul razborga yoziling</h2>
-      <p class="sub">Oyiga faqat 2 ta yangi loyiha olamiz — joy bo'lsa, shaxsan o'zim aloqaga chiqaman</p>
-      <div class="final-benefits">
-        <div class="fb"><span class="chk">✓</span>Voronkangizdagi teshikni topamiz</div>
-        <div class="fb"><span class="chk">✓</span>Lid narxini tushirish rejasini beramiz</div>
-        <div class="fb"><span class="chk">✓</span>Nishangiz bo'yicha raqamli prognoz</div>
-      </div>
+      <p class="sub">Sohangizda qanday natija qilish mumkinligini va erishish uchun nima qilish kerakligini to'liq ko'rib chiqamiz</p>
       <form class="lead-form" id="leadForm" onsubmit="return submitLead(event)">
         <div class="lf-row">
           <input class="lf-input" type="text" name="ism" placeholder="Ismingiz" required>
           <input class="lf-input" type="tel" name="tel" inputmode="tel" placeholder="Telefon raqamingiz" required
                  oninput="this.value=this.value.replace(/[^0-9+\s()-]/g,'')">
         </div>
-        <input class="lf-input" type="text" name="biznes_nomi" placeholder="Biznes nomi" required>
+        <input class="lf-input" type="text" name="biznes_nomi" placeholder="Kompaniya nomi" required>
         <input class="lf-input" type="text" name="biznes" placeholder="Yo'nalishi (ta'lim, B2B, e-com...)" required>
         <select class="lf-input" name="byudjet" required>
           <option value="" disabled selected>Oylik reklama byudjeti</option>
@@ -540,7 +538,9 @@ src="https://www.facebook.com/tr?id=2147378449183852&ev=PageView&noscript=1"
       <div class="lead-success" id="leadSuccess" hidden>
         <div class="ls-ic">✓</div>
         <h3>Rahmat! Arizangiz qabul qilindi.</h3>
-        <p>Tez orada shaxsan o'zim aloqaga chiqaman.</p>
+        <p>Yaqin orada aloqaga chiqamiz, telefoningiz yoningizda tursin 😉</p>
+        <p class="ls-alt">Kutishni istamasangiz, bizga yozing:</p>
+        <a class="btn btn-accent ls-tg" href="https://t.me/YunusMarketing" target="_blank" rel="noopener">Telegram'da yozish <span class="arw">→</span></a>
       </div>
     </div>
   </div>
@@ -604,7 +604,7 @@ src="https://www.facebook.com/tr?id=2147378449183852&ev=PageView&noscript=1"
       '🎬 Yangi ariza — VSL sahifa\n\n'+
       '👤 Ism: '+d.ism+'\n'+
       '📞 Tel: '+d.tel+'\n'+
-      '🏢 Biznes: '+d.biznes_nomi+'\n'+
+      '🏢 Kompaniya: '+d.biznes_nomi+'\n'+
       '🎯 Yo’nalish: '+d.biznes+'\n'+
       '💰 Byudjet: '+d.byudjet;
     btn.disabled=true;
