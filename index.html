@@ -616,9 +616,8 @@ src="https://www.facebook.com/tr?id=2147378449183852&ev=PageView&noscript=1"
       });
       if(!r.ok)throw new Error('tg');
       form.hidden=true;
-      if(window.fbq)fbq('track','Lead',{content_name:'Bepul razbor',value:0,currency:'USD'});
-      const s=document.getElementById('leadSuccess');
-      s.hidden=false; s.scrollIntoView({block:'center'});
+      // Lead hodisasi /rahmat sahifasida ishlaydi — u yerga o'tkazamiz (UTM'lar saqlanadi)
+      location.href='/rahmat'+location.search;
     }catch(err){
       btn.disabled=false; btn.innerHTML=old;
       alert('Xatolik yuz berdi. Iltimos, birozdan so’ng qayta urinib ko’ring.');
