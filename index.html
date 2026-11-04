@@ -595,6 +595,16 @@ src="https://www.facebook.com/tr?id=2147378449183852&ev=PageView&noscript=1"
   // lead form → Telegram (asosiy sahifadagi bilan bir xil)
   const TG_TOKEN='8751157877:AAEUIhcvvdO6z1SFLTNdGAU079s-Gt2KXJc';
   const TG_CHAT='1395556966';
+  // ariza → Agency CRM ham (Lidlar → "Yangi" ustuni)
+  const CRM_URL='https://crm-production-be31.up.railway.app/api/leads/incoming?key=abe2049fdaeb2450d464cdba7884da57';
+  function crmgaYubor(d){
+    const q=new URLSearchParams(location.search);
+    const body={manba:'Sayt',forma_nomi:'yunusmarketing.uz',ism:d.ism,telefon:d.tel,kompaniya:d.biznes_nomi,soha:d.biznes,
+      'Oylik reklama byudjeti':d.byudjet};
+    ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(k=>{if(q.get(k))body[k]=q.get(k);});
+    return fetch(CRM_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),keepalive:true})
+      .then(r=>{if(!r.ok)throw new Error('crm');});
+  }
   async function submitLead(e){
     e.preventDefault();
     const form=e.target;
@@ -610,11 +620,13 @@ src="https://www.facebook.com/tr?id=2147378449183852&ev=PageView&noscript=1"
     btn.disabled=true;
     const old=btn.innerHTML; btn.textContent='Yuborilmoqda…';
     try{
-      const r=await fetch('https://api.telegram.org/bot'+TG_TOKEN+'/sendMessage',{
+      const tg=fetch('https://api.telegram.org/bot'+TG_TOKEN+'/sendMessage',{
         method:'POST',headers:{'Content-Type':'application/json'},
         body:JSON.stringify({chat_id:TG_CHAT,text:text})
-      });
-      if(!r.ok)throw new Error('tg');
+      }).then(r=>{if(!r.ok)throw new Error('tg');});
+      // Ikkalasidan bittasi yetib borsa ham ariza yo'qolmaydi
+      const natija=await Promise.allSettled([tg,crmgaYubor(d)]);
+      if(!natija.some(n=>n.status==='fulfilled'))throw new Error('yuborilmadi');
       form.hidden=true;
       // Lead hodisasi /rahmat sahifasida ishlaydi — u yerga o'tkazamiz (UTM'lar saqlanadi)
       location.href='/rahmat'+location.search;
